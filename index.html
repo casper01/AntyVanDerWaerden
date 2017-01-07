@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="styles/styles.css">
+        <link rel="stylesheet" href="assets/lib/jquery-ui-1.12.1.custom/jquery-ui.min.css">
+        <script type="text/javascript" src="assets/lib/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="assets/lib/jquery.canvasjs.min.js"></script> 
+        <script type="text/javascript" src="assets/lib/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="assets/lib/linq.js"></script>
+        <script data-main="js/config.js" type="text/javascript" src="assets/lib/require.js"></script>
+    </head>
+    <body>
+        <div id="menu">
+            <div style="height:5px"></div>
+            <label>MENU</label>
+            <hr>
+            <label>n:</label>
+            <input id="n" type="number" min="1" placeholder="set count" />
+            <label>k:</label>
+            <input id="k" type="number" min="1" placeholder="substring len" />
+            <label>c:</label>
+            <input id="c" type="number" min="1" placeholder="colors count" />
+            <hr>
+            
+            <label>Bot 1:</label>
+            <select id="bot1Select"></select>
+            <label>Bot 2:</label>
+            <select id="bot2Select"></select>
+            <hr>
+            
+            <div id="visual-game-mode">
+                <button id="startButton" class="ui-button ui-widget ui-corner-all" type="button">Start visual game!</button>
+            </div>
+            <div id="step-game-mode">
+                <button id="startByStepButton" class="ui-button ui-widget ui-corner-all" type="button">Start step by step</button>
+                <button id="nextStepButton" class="ui-button ui-widget ui-corner-all" type="button">Next step</button>
+            </div>
+            <div id="statistics-mode">
+                <label>Tests:</label>
+                <input id="tests-count" type="number" min="1" placeholder="tests count" />
+                <button id="run-statistics" class="ui-button ui-widget ui-corner-all" type="button">Compute!</button>
+            </div>
+        </div>
+
+        <div id="rightPanel">
+            <div id="tabs">
+                <ul>
+                    <li><a id="start-fast-game" href="#game">Start Fast Game</a></li>
+                    <li><a id="start-step-game" href="#game">Start Step By Step Game</a></li>
+                    <li><a id="start-statistics" href="#statistics">Statistics</a></li>
+                </ul>
+                <div id="game"></div>
+                <div id="statistics">
+                    <h1>Statistics</h1>
+                    <div id="progressbar"></div>
+                    <div id="statistics-info">
+                        <p>
+                            No statistics available yet. Please fill values in menu and click "Compute!"
+                            button to run tests and wait till application finishes computations. After that
+                            statistics about all games will appear.
+                        </p>
+                    </div>
+                    <div id="computed-statistics">
+                        <ul class="floated-stats">
+                            <li><p>Games played: <span id="played-games"></span>.</p></li>
+                            <li><p>Elapsed time: <span id="elapsed-time"></span> seconds.</p></li>
+                            <li><p>Player 1 won <span id="p1-won"></span> times.</p></li>
+                            <li><p>Player 2 won <span id="p2-won"></span> times.</p></li>
+                        </ul>
+                    </div>
+                    <div id="players-percentage-chartContainer"></div>
+                    <div id="games-won-chartContainer"></div>
+                </div>
+            </div>
+        </div>
+        <div id="solution" class="ui-state-highlight ui-corner-all"></div>
+        <div id="message-box" title=""></div>
+    </body>
+    <script>
+        $( function() {
+            $(".menu-panel-button").checkboxradio({
+                icon: false
+            });
+            $("#menu-panel").controlgroup();
+        });
+        $("#n").spinner();
+        $("#k").spinner();
+        $("#c").spinner();
+        $("#tests-count").spinner();
+        $("#bot1Select").selectmenu();
+        $("#bot2Select").selectmenu();
+        $("#tabs").tabs({
+            heightStyle: "fill"
+        });
+        $("#message-box").dialog({
+            modal: true,
+            buttons: {
+                "Ok": function() {
+                    $(this).dialog("close");
+                }
+            }
+        });
+        $("#message-box").dialog("close");
+        $("#progressbar").progressbar({
+            value: 0
+        });
+    </script>
+</html>
